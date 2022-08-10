@@ -51,6 +51,26 @@
 			},
 			{
 				"inputs": [],
+				"name": "doneWithStay",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "occupier",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -91,11 +111,11 @@
 	},
 	"sources": {
 		"contracts\\HotelRoom.sol": {
-			"keccak256": "0xa8df8ef454952bf40e22b64cf4a162f16bd18e3d8a7ad2f25bc0bdc9e7696c49",
+			"keccak256": "0x3184fb91de1014091975c06d26c360e18787213a589ee0edef941ba63adcaee1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://dc7f9f755b83b1a3a3c82334c1b51dcaa588697bb26e88be2eb6a5cc0cefc30c",
-				"dweb:/ipfs/QmUVW9FLaDcFnoCCJ1eZxjZC9835eZCugc32v71VbaKd4S"
+				"bzz-raw://206bca22416a78fda483a4b7bfa37b2973375ec39c1e7d42fe6ccf03eb98ec5a",
+				"dweb:/ipfs/QmNaRsFAgA7uvdoP74E1cPDHuw8VYDDBu3wpYcXLsKoU7x"
 			]
 		}
 	},
