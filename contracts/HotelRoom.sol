@@ -13,9 +13,10 @@ contract HotelRoom {
     event Occupy(address _occupant, uint256 _value);
 
     address payable public owner;
+    address public occupier;
 
     constructor() {
-        owner = payable(msg.sender);    
+        owner = payable(msg.sender);
         currentStatus = Statuses.Vacant;
     }
 
@@ -32,11 +33,17 @@ contract HotelRoom {
     //function used to book a hotel room
     function book() public payable onlyWhileVacant costs(2 ether) { 
         currentStatus = Statuses.Occupied;
+        occupier = msg.sender;
 
         // owner.transfer(msg.value);
         (bool sent, bytes memory data) = owner.call{value: msg.value}("");
         require(sent);
 
         emit Occupy(msg.sender, msg.value);
+    }
+
+    function doneWithStay() public {
+        require(msg.sender==occupier, "only the occupier can call this function");
+        currentStatus = Statuses.Vacant;
     }
 }
