@@ -61,15 +61,17 @@ contract ReviewSystem {
     
     function getProduct(uint pid) public  view returns (Product memory) {
         require(pid > 0, "Productid required !");
+        require(keccak256(bytes(productDetails[pid].productName)) != keccak256(""));
         return productDetails[pid];
     }
      
     
     
     function reviewProduct(uint productId, uint urating, string memory ucomments, uint reviewDate) public {
-        require(productId >= 0, "Productid required !");
+        require(productId > 0, "Productid required !");
         require(urating > 0 && urating <= 5, "Product rating should be in 1-5 range !");
         require(userReview[productId][msg.sender].IsProductReviewedByUser == false, "Product already reviewed by user !");
+        require(keccak256(bytes(productDetails[productId].productName)) != keccak256(""));
 
 
         Product storage oldProduct = productDetails[productId];
@@ -94,12 +96,14 @@ contract ReviewSystem {
     
     function getProductAvgRating(uint pid) public view returns (uint ) {
         require(pid > 0, "Productid required !");
+        require(keccak256(bytes(productDetails[pid].productName)) != keccak256(""));
         //you could just sum them above and divide here
         return productDetails[pid].avgRating/productDetails[pid].totalReviewed;
     }
     
     function getCurrentUserComments(uint pid) public view returns (string memory ) {
         require(pid > 0, "Productid required !");
+        require(keccak256(bytes(productDetails[pid].productName)) != keccak256(""));
         
         return userReview[pid][msg.sender].comments;
          
@@ -107,6 +111,7 @@ contract ReviewSystem {
     
     function getCurrentUserRating(uint pid) public view returns (uint ) {
         require(pid > 0, "Productid required !");
+        require(keccak256(bytes(productDetails[pid].productName)) != keccak256(""));
         
         return userReview[pid][msg.sender].rating;
          
@@ -114,6 +119,7 @@ contract ReviewSystem {
     
     function getUserComments(uint pid, address user) public view returns (string memory ) {
         require(pid > 0, "Productid required !");
+        require(keccak256(bytes(productDetails[pid].productName)) != keccak256(""));
         
         return userReview[pid][user].comments;
          
@@ -121,6 +127,7 @@ contract ReviewSystem {
     
     function getUserRating(uint pid, address user) public view returns (uint ) {
         require(pid > 0, "Productid required !");
+        require(keccak256(bytes(productDetails[pid].productName)) != keccak256(""));
         
         return userReview[pid][user].rating;
          
@@ -128,6 +135,7 @@ contract ReviewSystem {
     
     function getUserDateOfReview(uint pid, address user) public view returns (uint) {
         require(pid > 0, "Productid required !");
+        require(keccak256(bytes(productDetails[pid].productName)) != keccak256(""));
         
         return userReview[pid][user].dateOfReview;
          
