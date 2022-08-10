@@ -8,7 +8,7 @@ contract ReviewSystem {
         string productDesc;
         uint productPrice;
         string productHash;
-        uint avgRating;
+        uint avgRating;     //its the sum of all ratings, will 
         uint totalReviewed;
         address seller;
         address[] users;                                              //
@@ -75,11 +75,8 @@ contract ReviewSystem {
         Product storage oldProduct = productDetails[productId];
 
 
-        oldProduct.avgRating = oldProduct.avgRating * oldProduct.totalReviewed;
         oldProduct.avgRating += urating;
         oldProduct.totalReviewed++;
-        oldProduct.avgRating = oldProduct.avgRating / oldProduct.totalReviewed;
-
         oldProduct.users.push(msg.sender);
 
         newInput.rating = urating;
@@ -95,10 +92,10 @@ contract ReviewSystem {
     }
     
     
-    function getProductAvgRating(uint pid) public view returns (string memory , uint ) {
+    function getProductAvgRating(uint pid) public view returns (uint ) {
         require(pid > 0, "Productid required !");
         //you could just sum them above and divide here
-        return (productDetails[pid].productName, productDetails[pid].avgRating);
+        return productDetails[pid].avgRating/productDetails[pid].totalReviewed;
     }
     
     function getCurrentUserComments(uint pid) public view returns (string memory ) {
